@@ -31,7 +31,7 @@ class Interest(models.Model):
 #################### User ##############################
 class User(models.Model):
     username = models.CharField(max_length=255, unique=True)
-    full_name = models.CharField(max_length=255)
+    full_name = models.CharField(unique=True, max_length=255)
     email = models.EmailField(unique=True)
     interests = models.ManyToManyField(Interest)
     is_student = models.BooleanField(default=False)
@@ -63,7 +63,7 @@ class Major(models.Model):
 #################### UserEducationDetails ##############################
 class UserEducationDetails(models.Model):
     oto_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
-    fx_full_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    fx_full_name = models.ForeignKey(User, to_field='full_name', on_delete=models.CASCADE)
     fx_learning_institution = models.ForeignKey(LearningInstitution, on_delete=models.CASCADE)
     fx_student_major = models.ForeignKey(Major, on_delete=models.SET_NULL, null=True, blank=True)
     units = models.JSONField()
