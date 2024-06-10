@@ -148,8 +148,8 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'core/static'),
 # ]
 
-STATIC_URL = '~/jadiv2/core/static/'
-STATIC_ROOT = '~/jadi-DBMS-v2/jadiv2/core/static'
+STATIC_URL = 'jadiv2/core/static/'
+STATIC_ROOT = 'jadi-DBMS-v2/jadiv2/core/static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
