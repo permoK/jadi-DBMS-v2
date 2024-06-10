@@ -57,7 +57,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'jadi.urls'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://983e-41-209-10-152.ngrok-free.app',
+    'https://jadi.up.railway.app',
     # Add any other trusted origins here
 ]
 
