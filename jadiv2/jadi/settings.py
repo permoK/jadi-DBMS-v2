@@ -148,9 +148,12 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'core/static'),
 # ]
 
-STATIC_URL = 'jadiv2/core/static/'
-STATIC_ROOT = 'jadi-DBMS-v2/jadiv2/core/static'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_URL = 'jadiv2/core/static/'
+# STATIC_ROOT = 'jadi-DBMS-v2/jadiv2/core/static'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
