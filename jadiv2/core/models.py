@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+from django.db.models import constraints
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -63,7 +64,7 @@ class Major(models.Model):
 #################### UserEducationDetails ##############################
 class UserEducationDetails(models.Model):
     oto_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
-    fx_full_name = models.ForeignKey(User, to_field='full_name', on_delete=models.CASCADE)
+    oto_full_name = models.OneToOneField(User, to_field='full_name', on_delete=models.CASCADE)
     fx_learning_institution = models.ForeignKey(LearningInstitution, on_delete=models.CASCADE)
     fx_student_major = models.ForeignKey(Major, on_delete=models.SET_NULL, null=True, blank=True)
     units = models.JSONField()
@@ -73,6 +74,16 @@ class UserEducationDetails(models.Model):
 
     def __str__(self):
         return f'{self.oto_user.username} - {self.fx_learning_institution.institution_name}'
+
+    def clean(self):
+        # Ensure oto_full_name matches the full_name of the related User
+        if self.oto_full_name != self.oto_user.full_name:
+            raise ValidationError({'oto_full_name': 'oto_full_name must match the full_name of the related user.'})
+
+    def save(self, *args, **kwargs):
+        # Ensure oto_full_name matches the full_name of the related User
+        self.oto_full_name = self.oto_user.full_name
+        super().save(*args, **kwargs)
 
 #################### End UserEducationDetails ##############################
 
