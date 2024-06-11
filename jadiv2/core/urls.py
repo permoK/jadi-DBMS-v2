@@ -15,6 +15,12 @@ router.register(r'user-profiles', UserView, basename='userprofile')
 router.register(r'learning-institutions', LearningInstitutionView, basename='learninginstitution')
 router.register(r'interests', InterestView, basename='interest')
 router.register(r'notes-upload', NotesUploadView, basename='upload')
+router.register(r'major', MajorView, basename='major')
+router.register(r'UserEducationDetails', UserEducationDetailsView, basename='UserEducationDetails')
+router.register(r'waitlist', WaitlistView, basename='waitlist')
+router.register(r'resource-type', ResourceTypeView, basename='resource-type')
+router.register(r'resource', ResourceView, basename='resource')
+router.register(r'resource-tag', ResourceTagView, basename='resource-tag')
 
 urlpatterns = [
     path('',index),

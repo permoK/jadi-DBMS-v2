@@ -37,10 +37,25 @@ class UserView(viewsets.ModelViewSet):
 class MajorView(viewsets.ModelViewSet):
     pass
 
+class UserEducationDetailsView(viewsets.ModelViewSet):
+    pass
+
+class WaitlistView(viewsets.ModelViewSet):
+    pass
+
 class NotesUploadView(viewsets.ModelViewSet):
     queryset = NotesUpload.objects.all()
     serializer_class = NotesUploadSerializer
     
+class ResourceTypeView(viewsets.ModelViewSet):
+    pass
+
+class ResourceView(viewsets.ModelViewSet):
+    pass
+
+class ResourceTagView(viewsets.ModelViewSet):
+    pass
+
 
 ###################### END API SECTION #########################
 # Compare this snippet from urls.py:
