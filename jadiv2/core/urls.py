@@ -15,8 +15,8 @@ router.register(r'learning-institutions', LearningInstitutionView, basename='lea
 router.register(r'interests', InterestView, basename='interest')
 
 urlpatterns = [
-    path('', index),
-    path('upload', notesUpload),
+    path('',index),
+    path('upload', upload),
     path('api/v1/user/', include(router.urls)),
     path('api/v2/user/<int:pk>/', include(router.urls)),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
