@@ -35,26 +35,32 @@ class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class MajorView(viewsets.ModelViewSet):
-    pass
+    queryset = Major.objects.all()
+    serializer_class = MajorSerializer
 
 class UserEducationDetailsView(viewsets.ModelViewSet):
-    pass
+    queryset = UserEducationDetails.objects.all()
+    serializer_class = UserEducationDetailsSerializer
 
 class WaitlistView(viewsets.ModelViewSet):
-    pass
+    queryset = Waitlist.objects.all()
+    serializer_class = WaitlistSerializer
 
 class NotesUploadView(viewsets.ModelViewSet):
     queryset = NotesUpload.objects.all()
     serializer_class = NotesUploadSerializer
     
 class ResourceTypeView(viewsets.ModelViewSet):
-    pass
+    queryset = ResourceType.objects.all()
+    serializer_class = ResourceTypeSerializer
 
 class ResourceView(viewsets.ModelViewSet):
-    pass
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
 
 class ResourceTagView(viewsets.ModelViewSet):
-    pass
+    queryset = ResourceTag.objects.all()
+    serializer_class = ResourceTagSerializer
 
 
 ###################### END API SECTION #########################
