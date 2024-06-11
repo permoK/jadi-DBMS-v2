@@ -1,3 +1,4 @@
+from http.client import NOT_EXTENDED
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import *
@@ -13,6 +14,7 @@ router = DefaultRouter()
 router.register(r'user-profiles', UserView, basename='userprofile')
 router.register(r'learning-institutions', LearningInstitutionView, basename='learninginstitution')
 router.register(r'interests', InterestView, basename='interest')
+router.register(r'notes-upload', NotesUploadView, basename='upload')
 
 urlpatterns = [
     path('',index),

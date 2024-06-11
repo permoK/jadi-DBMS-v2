@@ -20,32 +20,27 @@ def upload(request):
             return redirect(index)
     return render(request, 'upload.html',{'form':form})
 
-# class UserView(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-class UserView(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-
-    def get_queryset(self):
-        queryset = User.objects.all()
-        institution = self.request.query_params.get('institution', None)
-        interest = self.request.query_params.get('interest', None)
-        
-        if institution is not None:
-            queryset = queryset.filter(institution__id=institution)
-        if interest is not None:
-            queryset = queryset.filter(interests__id=interest)
-        
-        return queryset
+###################### API SECTION #########################
 
 class LearningInstitutionView(viewsets.ModelViewSet):
     queryset = LearningInstitution.objects.all()
     serializer_class = LearningInstitutionSerializer
 
-
 class InterestView(viewsets.ModelViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
 
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class MajorView(viewsets.ModelViewSet):
+    pass
+
+class NotesUploadView(viewsets.ModelViewSet):
+    queryset = NotesUpload.objects.all()
+    serializer_class = NotesUploadSerializer
+    
+
+###################### END API SECTION #########################
 # Compare this snippet from urls.py:

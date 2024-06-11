@@ -1,4 +1,5 @@
-from rest_framework import serializers
+from django.db.models.lookups import In
+from rest_framework import fields, serializers
 from .models import *
 
 
@@ -17,6 +18,11 @@ class LearningInstitutionSerializer(serializers.ModelSerializer):
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
+        fields = '__all__'
+
+class NotesUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NotesUpload
         fields = '__all__'
 
 # Compare this snippet from views.py:

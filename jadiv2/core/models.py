@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.db.models import constraints
 from django.core.exceptions import ValidationError
-from django.shortcuts import redirect
 
 # Create your models here.
 
@@ -107,8 +106,6 @@ class Waitlist(models.Model):
 
 #################### uploads ##################################
 class NotesUpload(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # user = models.CharField(max_length=100, blank=True)
     title = models.CharField(max_length=100)
     note = models.FileField(upload_to='assets/',)
     
@@ -116,7 +113,7 @@ class NotesUpload(models.Model):
         db_table = 'notes'
 
     def __str__(self):
-        return f'{self.title - self.user}'
+        return f'{self.title }'
 ################### endUploads #################################
 
 ################### resources #################################
