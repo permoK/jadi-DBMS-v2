@@ -44,6 +44,8 @@ def upload(request):
 class LearningInstitutionView(viewsets.ModelViewSet):
     queryset = LearningInstitution.objects.all()
     serializer_class = LearningInstitutionSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class InterestView(viewsets.ModelViewSet):
