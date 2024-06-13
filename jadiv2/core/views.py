@@ -7,7 +7,23 @@ from django.shortcuts import redirect
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+
+#DRF authentication modules
+from rest_framework.views import APIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 #Create your views here.
+
+# django auth views
+class MyProtectedView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Your view logic here
+        return Response({"message": "Authenticated!"})
 
 
 def index(request):
