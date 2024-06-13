@@ -34,6 +34,13 @@ urlpatterns = [
     # Register user
     path('register/', views.CreateUserView.as_view(), name='register'),
 
+    # Login user
+    path('login/', views.CustomLoginView.as_view(), name='login'),
+    
+    # Get token
+    path('token/', views.ObtainAuthTokenView.as_view(), name='token'),
+
+
     #api authentication
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
