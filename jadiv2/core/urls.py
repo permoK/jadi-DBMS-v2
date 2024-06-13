@@ -3,6 +3,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import *
 from .models import NotesUpload
+from . import views
 
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -29,6 +30,9 @@ urlpatterns = [
     path('upload', upload),
     path('api/v1/user/', include(router.urls)),
     path('api/v2/user/<int:pk>/', include(router.urls)),
+
+    # Register user
+    path('register/', views.CreateUserView.as_view(), name='register'),
 
     #api authentication
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),

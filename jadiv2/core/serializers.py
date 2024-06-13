@@ -1,7 +1,24 @@
 from django.db.models.lookups import In
 from rest_framework import fields, serializers
 from .models import *
+from django.contrib.auth import get_user_model
 
+# Authenticate a user 
+AuthUser = get_user_model()
+
+class AuthUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthUser
+        fields = ('username', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = AuthUser.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
 
 class LearningInstitutionSerializer(serializers.ModelSerializer):
     class Meta:

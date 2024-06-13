@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, generics, permissions
 from .models import *
 from .serializers import *
 from .forms import notesUploadForm
@@ -15,6 +15,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 #Create your views here.
+
+# Register new user
+class CreateUserView(generics.CreateAPIView):
+    serializer_class = AuthUserSerializer
+    permission_classes = [permissions.AllowAny]
 
 # django auth views
 class MyProtectedView(APIView):
