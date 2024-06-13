@@ -24,52 +24,52 @@ def upload(request):
 
 ###################### API SECTION #########################
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class LearningInstitutionView(viewsets.ModelViewSet):
     queryset = LearningInstitution.objects.all()
     serializer_class = LearningInstitutionSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class InterestView(viewsets.ModelViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class MajorView(viewsets.ModelViewSet):
     queryset = Major.objects.all()
     serializer_class = MajorSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class UserEducationDetailsView(viewsets.ModelViewSet):
     queryset = UserEducationDetails.objects.all()
     serializer_class = UserEducationDetailsSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class WaitlistView(viewsets.ModelViewSet):
     queryset = Waitlist.objects.all()
     serializer_class = WaitlistSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class NotesUploadView(viewsets.ModelViewSet):
     queryset = NotesUpload.objects.all()
     serializer_class = NotesUploadSerializer
     
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class ResourceTypeView(viewsets.ModelViewSet):
     queryset = ResourceType.objects.all()
     serializer_class = ResourceTypeSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class ResourceView(viewsets.ModelViewSet):
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')  # Cache for 1 day
+@method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class ResourceTagView(viewsets.ModelViewSet):
     queryset = ResourceTag.objects.all()
     serializer_class = ResourceTagSerializer
