@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # static
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,6 +64,7 @@ ROOT_URLCONF = 'jadi.urls'
 
 CSRF_TRUSTED_ORIGINS = [
     'https://jadi.up.railway.app',
+    'https://codius.tech',
     # Add any other trusted origins here
 ]
 
