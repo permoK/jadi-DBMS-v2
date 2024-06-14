@@ -1,9 +1,13 @@
+import re
 from django.shortcuts import render
 from rest_framework import viewsets, generics, permissions
 from .models import *
 from .serializers import *
 from .forms import notesUploadForm
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -21,7 +25,7 @@ from rest_framework.response import Response
 
 
 # django login
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from rest_framework.views import APIView
@@ -39,18 +43,41 @@ class CustomLoginView(LoginView):
     success_url = reverse_lazy('token')
 
 # Get token
-class ObtainAuthTokenView(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'username': user.username
-        })
+class GetTokenView(LoginRequiredMixin, TemplateView):
+    template_name = 'get_token.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        token, created = Token.objects.get_or_create(user=self.request.user)
+        context['token'] = token.key
+        return context
+
+@login_required
+def get_token(request):
+    token, created = Token.objects.get_or_create(user=request.user)
+    return render(request, 'get_token.html', {'token': token.key})
+
+
+# Profile
+@login_required
+def profile(request):
+    user = request.user
+    token = Token.objects.get(user=user)
+    context = {
+                'user':user,
+                'token':token
+            }
+    return render(request, 'profile.html', context)
+
+# Logout 
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page
+    return redirect('index')  
+
+
+def index(request):
+    return render(request, 'index.html')
 
 # django auth views
 class MyProtectedView(APIView):
@@ -62,8 +89,6 @@ class MyProtectedView(APIView):
         return Response({"message": "Authenticated!"})
 
 
-def index(request):
-    return render(request, 'index.html')
 
 def upload(request):
     form = notesUploadForm()
@@ -73,6 +98,8 @@ def upload(request):
             form.save()
             return redirect(index)
     return render(request, 'upload.html',{'form':form})
+
+
 
 ###################### API SECTION #########################
 

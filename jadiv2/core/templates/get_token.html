@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Token</title>
+</head>
+<body>
+    <h1>Get Authentication Token</h1>
+    {% if user.is_authenticated %}
+        <p>Your authentication token is:</p>
+        <code>{{ token }}</code>
+    {% else %}
+        <p>You need to be logged in to get an authentication token.</p>
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</body>
+</html>

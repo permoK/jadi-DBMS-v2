@@ -1,4 +1,5 @@
 from http.client import NOT_EXTENDED
+from django.contrib.auth import logout
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import *
@@ -26,22 +27,28 @@ router.register(r'resource', ResourceView, basename='resource')
 router.register(r'resource-tag', ResourceTagView, basename='resource-tag')
 
 urlpatterns = [
-    path('',index),
+    path('',index, name='index'),
     path('upload', upload),
     path('api/v1/user/', include(router.urls)),
     path('api/v2/user/<int:pk>/', include(router.urls)),
 
     # Register user
-    path('register/', views.CreateUserView.as_view(), name='register'),
+    path('accounts/register/', views.CreateUserView.as_view(), name='register'),
 
     # Login user
-    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('accounts/login/', views.CustomLoginView.as_view(), name='login'),
     
-    # Get token
-    path('token/', views.ObtainAuthTokenView.as_view(), name='token'),
+    # Profile
+    path('accounts/profile/', views.profile, name='profile'),
 
+    # logout
+    path('logout/', views.logout_view, name='logout'),
 
     #api authentication
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
+
+    # get token
+    path('get-token/', views.get_token, name='get_token'),
+    path('get-token-class-based/', views.GetTokenView.as_view(), name='get_token_class_based'),
 ]
