@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="display: grid; justify-content: center;">
+<div style="display: grid; justify-content: center; color: white; background-color: #fff;">
 	<div>
 		<h2>Profile</h2>
 		<h5>Name:{{user}}</h5>
@@ -10,7 +10,7 @@
 	</div>
 	<form action="{% url 'logout' %}" method="post">
 		{% csrf_token %}
-		<button type="submit">Logout</button>
+		<button class="btn btn-primary" type="submit">Logout</button>
 	</form>
 
 </div>
