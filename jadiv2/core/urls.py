@@ -33,7 +33,7 @@ urlpatterns = [
     path('api/v2/user/<int:pk>/', include(router.urls)),
 
     # Register user
-    path('accounts/register/', views.CreateUserView.as_view(), name='register'),
+    path('accounts/register/', views.register_view, name='register'),
 
     # Login user
     path('accounts/login/', views.CustomLoginView.as_view(), name='login'),

@@ -8,13 +8,16 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
 
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
 
 #DRF authentication modules
 from rest_framework.views import APIView
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -37,9 +40,23 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = AuthUserSerializer
     permission_classes = [permissions.AllowAny]
 
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'login success')
+            return redirect('profile')  # Redirect to profile page after registration
+    else:
+        form = UserCreationForm()
+        context = {"form":form, "error":form.errors}
+    context = {"form":form}
+    return render(request, 'accounts/register.html', context)
+
 # Login user
 class CustomLoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'accounts/login.html'
     success_url = reverse_lazy('token')
 
 # Get token
@@ -67,7 +84,7 @@ def profile(request):
                 'user':user,
                 'token':token
             }
-    return render(request, 'profile.html', context)
+    return render(request, 'accounts/profile.html', context)
 
 # Logout 
 def logout_view(request):
@@ -102,12 +119,12 @@ def upload(request):
 
 
 ###################### API SECTION #########################
-
+@method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class LearningInstitutionView(viewsets.ModelViewSet):
     queryset = LearningInstitution.objects.all()
     serializer_class = LearningInstitutionSerializer
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
