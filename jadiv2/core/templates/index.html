@@ -3,10 +3,14 @@
 {% block content %}
 <div style="display: grid; justify-content: center; gap: 10px;">
 	<h1>Home</h1>
+	{% if request.user.is_authenticated %}
 	<a href="admin/"><button class="btn btn-primary">JADI-DBMS</button></a><br>
 	<a href="{% url 'get_token' %}"><button class="btn btn-primary">AuthToken</button></a><br>
-
+	<a href="{% url 'profile' %}"><button class="btn btn-success">Profile</button></a><br>
+	<a href="{% url 'logout' %}"><button class="btn btn-danger">Logout</button></a>
+	{% else %}
 	<a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a><br>
 	<a href="{% url 'login' %}"><button class="btn btn-primary">Login</button></a>
+	{% endif %}
 </div>
 {% endblock %}

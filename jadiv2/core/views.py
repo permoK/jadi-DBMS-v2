@@ -1,5 +1,6 @@
 import re
 from django.shortcuts import render
+from django.template import context
 from rest_framework import viewsets, generics, permissions
 from .models import *
 from .serializers import *
@@ -47,7 +48,7 @@ def register_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'login success')
-            return redirect('profile')  # Redirect to profile page after registration
+            return redirect('index')  # Redirect to profile page after registration
     else:
         form = UserCreationForm()
         context = {"form":form, "error":form.errors}
@@ -57,7 +58,7 @@ def register_view(request):
 # Login user
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
-    success_url = reverse_lazy('token')
+    success_url = reverse_lazy('index')
 
 # Get token
 class GetTokenView(LoginRequiredMixin, TemplateView):
