@@ -3,7 +3,7 @@
 {% block content %}
 <div style="display: grid; justify-content: center; gap: 10px;">
 	<h1>Home</h1>
-	{% if request.user.is_authenticated %}
+	{% if user.is_authenticated %}
 	<a href="admin/"><button class="btn btn-primary">JADI-DBMS</button></a><br>
 	<a href="{% url 'get_token' %}"><button class="btn btn-primary">AuthToken</button></a><br>
 	<a href="{% url 'profile' %}"><button class="btn btn-success">Profile</button></a><br>

@@ -3,12 +3,23 @@
 {% block content%}
 <div style="display: grid; justify-content: center; gap: 10px;">
 	<h1>Login</h1>
-	<form method="post">
+	<form method="POST" action="{% url 'login'%}" style="display: grid; gap: 10px;">
 		{% csrf_token %}
-		{{ form.as_p }}
+		<div class="message">
+			{% for message in messages %}
+			{% if "success" in message.tags %}
+			<span style="color: green;" class='success_message_box' id='message' >{{ message }}</span>
+			{% else %}
+			<span style="color: red; font-size: 1rem;" class='error_message_box'>{{ message }}</span>		
+			{% endif %}
+			{% endfor %}
+
+		</div>
+		<input type="text" name="username" placeholder="username"><br>
+		<input type="password" name="password" placeholder="password"><br>
 		<button type="submit" class="btn btn-info" >Login</button><br>
 
-		<span>Don't have an account?</span><h5><a href="{% url 'register' %}">Register</a></h5>
 	</form>
+	<span>Don't have an account?</span><h5><a href="{% url 'register' %}">Register</a></h5>
 </div>
 {% endblock content %}

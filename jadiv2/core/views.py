@@ -56,9 +56,30 @@ def register_view(request):
     return render(request, 'accounts/register.html', context)
 
 # Login user
-class CustomLoginView(LoginView):
-    template_name = 'accounts/login.html'
-    success_url = reverse_lazy('index')
+def login_view(request):
+    if request.method == 'POST':
+        # Handle login form submission
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            # Redirect to a specific URL after login
+            return redirect('index')  # Replace 'home' with your desired URL name
+        else:
+            # Handle invalid login
+            # Add error message or other handling as needed
+            messages.error(request,'invalid username or password')
+            return redirect('login')
+    else:
+        # Display login form
+        message = messages.get_messages(request)
+        return render(request, 'accounts/login.html', {'messages':message})
+# class CustomLoginView(LoginView):
+#     template_name = 'accounts/login.html'
+#     # success_url = reverse_lazy('index')
+#     reverse_lazy('index')
 
 # Get token
 class GetTokenView(LoginRequiredMixin, TemplateView):
@@ -95,7 +116,10 @@ def logout_view(request):
 
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'is_authenticated':request.user.is_authenticated
+            }
+    return render(request, 'index.html', context)
 
 # django auth views
 class MyProtectedView(APIView):

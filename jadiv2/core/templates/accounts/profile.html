@@ -11,11 +11,11 @@
 	<form action="{% url 'logout' %}" method="post">
 		{% csrf_token %}
 
-		<a href="{% url 'index' %}"><button class="btn btn-primary">Home</button></a>
 		<button class="btn btn-danger" type="submit">Logout</button>
 
 	</form>
 
+	<a href="{% url 'index' %}"><button class="btn btn-primary">Home</button></a>
 </div>
 
 {% endblock content %}
