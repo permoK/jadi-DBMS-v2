@@ -156,46 +156,64 @@ class LearningInstitutionView(viewsets.ModelViewSet):
 class InterestView(viewsets.ModelViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class MajorView(viewsets.ModelViewSet):
     queryset = Major.objects.all()
     serializer_class = MajorSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class UserEducationDetailsView(viewsets.ModelViewSet):
     queryset = UserEducationDetails.objects.all()
     serializer_class = UserEducationDetailsSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class WaitlistView(viewsets.ModelViewSet):
     queryset = Waitlist.objects.all()
     serializer_class = WaitlistSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class NotesUploadView(viewsets.ModelViewSet):
     queryset = NotesUpload.objects.all()
     serializer_class = NotesUploadSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
     
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class ResourceTypeView(viewsets.ModelViewSet):
     queryset = ResourceType.objects.all()
     serializer_class = ResourceTypeSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class ResourceView(viewsets.ModelViewSet):
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 @method_decorator(cache_page(60 * 60 * 0.2), name='dispatch')  # Cache for 1 day
 class ResourceTagView(viewsets.ModelViewSet):
     queryset = ResourceTag.objects.all()
     serializer_class = ResourceTagSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 ###################### END API SECTION #########################

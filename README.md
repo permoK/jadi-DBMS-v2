@@ -13,3 +13,8 @@ https://github.com/permoK/jadi-DBMS
 - cleaner code
 - organised requirements and new virtual env
 - deployment
+- API
+
+# API
+
+### Below shows how to use the resources using the API
