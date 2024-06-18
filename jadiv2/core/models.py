@@ -161,23 +161,24 @@ class ResourceTag(models.Model):
 ################### end resources #################################
 
 ################### Folder ###################################
-class FolderName(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, unique=True)
+# class FolderName(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=100, unique=True)
     
-    class Meta:
-        db_table = 'folder_names'
+#     class Meta:
+#         db_table = 'folder_names'
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 class Folder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.OneToOneField(FolderName, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100 )
     resources = models.ManyToManyField(Resource)
     
     class Meta:
         db_table = 'folders'
+        unique_together = ('user', 'name')
     
     def __str__(self):
         return f"{self.user} - {self.name}"
