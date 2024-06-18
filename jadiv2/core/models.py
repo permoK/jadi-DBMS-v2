@@ -1,3 +1,4 @@
+from re import T
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.db.models import CharField, ManyToManyField, constraints
@@ -160,10 +161,12 @@ class ResourceTag(models.Model):
 ################### Folder ###################################
 class Folder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     resources = models.ManyToManyField(Resource)
     
     class Meta:
         db_table = 'folders'
-
+    
+    def __str__(self):
+        return f"{self.user} - {self.name}"
 ################ End Folder #######################################
