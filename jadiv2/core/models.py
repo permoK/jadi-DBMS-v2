@@ -1,7 +1,9 @@
+from enum import unique
+from operator import mod
 from re import T
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-from django.db.models import CharField, ManyToManyField, constraints
+from django.db.models import CharField, ManyToManyField, OneToOneField, constraints
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -159,9 +161,19 @@ class ResourceTag(models.Model):
 ################### end resources #################################
 
 ################### Folder ###################################
-class Folder(models.Model):
+class FolderName(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True)
+    
+    class Meta:
+        db_table = 'folder_names'
+
+    def __str__(self):
+        return self.name
+
+class Folder(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.OneToOneField(FolderName, on_delete=models.CASCADE)
     resources = models.ManyToManyField(Resource)
     
     class Meta:
