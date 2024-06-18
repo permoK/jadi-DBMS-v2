@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-from django.db.models import CharField, constraints
+from django.db.models import CharField, ManyToManyField, constraints
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -155,10 +155,15 @@ class ResourceTag(models.Model):
         num = str(self.resource)
         return f"resource - {num}" 
 
+################### end resources #################################
+
+################### Folder ###################################
 class Folder(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    resources = models.ManyToManyField(Resource)
     
     class Meta:
         db_table = 'folders'
-################### end resources #################################
+
+################ End Folder #######################################
