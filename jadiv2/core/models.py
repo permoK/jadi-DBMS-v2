@@ -143,8 +143,9 @@ class Resource(models.Model):
 
     class Meta:
         db_table = 'resources'
-    # def __str__(self):
-    #     return self.uploaded_by
+
+    def __str__(self):
+        return f"{self.title} - {self.uploaded_by}"
 
 class ResourceTag(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
@@ -156,21 +157,11 @@ class ResourceTag(models.Model):
 
     def __str__(self):
         num = str(self.resource)
-        return f"resource - {num}" 
+        return f"{num}" 
 
 ################### end resources #################################
 
 ################### Folder ###################################
-# class FolderName(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=100, unique=True)
-    
-#     class Meta:
-#         db_table = 'folder_names'
-
-#     def __str__(self):
-#         return self.name
-
 class Folder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100 )
